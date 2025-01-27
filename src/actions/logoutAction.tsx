@@ -17,5 +17,5 @@ export async function action() {
 
   localStorage.removeItem("expiration");
 
-  return redirect("/");
+  return redirect("/login");
 }

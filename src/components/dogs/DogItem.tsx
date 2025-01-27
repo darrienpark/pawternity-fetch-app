@@ -1,12 +1,20 @@
-import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { Dog } from "../../models/dog";
+import { favoritesActions } from "../../store/store";
 
 export default function DogItem({ dog }: { dog: Dog }) {
-  const [isFavorited, setIsFavorited] = useState(false);
+  const favorites = useAppSelector((state) => state.favorites.favorites);
+  const isFavorited = favorites.some((favorite) => favorite.id === dog.id);
+  const dispatch = useAppDispatch();
 
   const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
+    if (!isFavorited) {
+      console.log(`Added ${dog.name} to favorites!`);
+      dispatch(favoritesActions.add(dog));
+    } else {
+      dispatch(favoritesActions.remove(dog.id));
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {

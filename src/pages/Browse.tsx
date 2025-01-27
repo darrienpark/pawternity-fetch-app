@@ -3,6 +3,7 @@ import { Pagination } from "@mui/material";
 import { useState, useEffect } from "react";
 import DogList from "../components/dogs/DogList";
 import Filter from "../components/filter/Filter";
+import NoResults from "../components/NoResults";
 
 function BrowsePage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -89,7 +90,7 @@ function BrowsePage() {
   }
 
   return (
-    <div className="px-5 sm:px-10 flex-grow flex flex-col">
+    <div className="flex-grow flex flex-col">
       <div className="my-8">
         <p className="text-3xl font-bold text-gray-800 text-left">Meet Your New Best Friend</p>
         <p className="text-lg text-gray-600 mt-2 text-left">
@@ -104,17 +105,15 @@ function BrowsePage() {
           <CircularProgress size="lg" />
         </div>
       ) : filteredDogs.length > 0 ? (
-        <>
+        <div className="flex flex-col items-center gap-6 pb-8">
           <DogList data={filteredDogs} />
-          <Pagination
-            count={pages}
-            page={currentPage}
-            onChange={handlePageChange}
-            className="flex justify-center py-6"
-          />
-        </>
+          <Pagination count={pages} page={currentPage} onChange={handlePageChange} />
+        </div>
       ) : (
-        <p>No dogs found for the selected breeds.</p>
+        <NoResults
+          title="No Dogs Found"
+          description="We couldn’t find any pups matching your search. Try adjusting your filters or check back later for new arrivals!"
+        />
       )}
     </div>
   );
