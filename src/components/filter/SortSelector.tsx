@@ -23,7 +23,7 @@ const SortSelector = ({ sort, onChange }: SortSelectorProps) => {
       <Select
         defaultValue={sort}
         aria-labelledby="sort-label"
-        className="px-2 w-full sm:w-auto"
+        className="px-2 w-full sm:w-auto flex-grow md:flex-grow-0"
         onChange={(_, value) => onChange(value ?? sort)}
       >
         {sortOptions.map((option) => (

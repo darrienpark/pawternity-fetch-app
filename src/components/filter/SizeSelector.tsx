@@ -16,7 +16,7 @@ const SizeSelector = ({ size, onChange }: SizeSelector) => {
       <Select
         defaultValue={size}
         aria-labelledby="size-label"
-        className="px-2 w-full sm:w-auto"
+        className="px-2 w-full sm:w-auto flex-grow md:flex-grow-0"
         onChange={(_, value) => onChange(value ?? size)}
       >
         {sizeOptions.map((option) => (

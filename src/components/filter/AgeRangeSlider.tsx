@@ -1,5 +1,5 @@
 import { Slider } from "@mui/joy";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type AgeRangeSliderProps = {
   range: number[];
@@ -9,17 +9,25 @@ type AgeRangeSliderProps = {
 };
 
 const AgeRangeSlider = ({ range, min, max, onChange }: AgeRangeSliderProps) => {
+  const lastChange = useRef<number | null>();
   const [sliderValue, setSliderValue] = useState(range);
 
   const handleChange = (_: Event, value: number | number[]) => {
-    if (Array.isArray(value)) {
-      setSliderValue(value);
-      onChange(value);
+    setSliderValue(value as number[]);
+
+    // Debounce onChange callback
+    if (lastChange.current) {
+      clearTimeout(lastChange.current);
     }
+
+    lastChange.current = setTimeout(() => {
+      lastChange.current = null;
+      onChange(value as number[]);
+    }, 500);
   };
 
   return (
-    <div className="flex sm:flex-row flex-col items-start w-full sm:max-w-xs sm:items-center gap-x-6">
+    <div className="flex sm:flex-row flex-col items-start w-full sm:items-center gap-x-6 md:flex-grow md:w-auto">
       <label id="age-range-label" className="block text-sm font-medium text-gray-700 shrink-0">
         Age range
       </label>
