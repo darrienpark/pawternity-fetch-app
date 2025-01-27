@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { Dog } from "../../util/types";
+import { Dog } from "../../models/dog";
 
 export default function DogItem({ dog }: { dog: Dog }) {
   const [isFavorited, setIsFavorited] = useState(false);

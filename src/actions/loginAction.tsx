@@ -7,17 +7,14 @@ export async function action({ request }: { request: Request }) {
     email: data.get("email"),
   };
 
-  const response = await fetch(
-    "https://frontend-take-home-service.fetch.com/auth/login",
-    {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
+  const response = await fetch("https://frontend-take-home-service.fetch.com/auth/login", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
   // Handle any specific error codes here to send back to UI for visualization
   // Example:
@@ -35,5 +32,5 @@ export async function action({ request }: { request: Request }) {
   expiration.setHours(expiration.getHours() + 1);
   localStorage.setItem("expiration", expiration.toISOString());
 
-  return redirect("/");
+  return redirect("/browse");
 }

@@ -2,12 +2,20 @@ import { CircularProgress } from "@mui/joy";
 import { Pagination } from "@mui/material";
 import { useState, useEffect } from "react";
 import DogList from "../components/dogs/DogList";
-import Filter from "../components/Filter";
+import Filter from "../components/filter/Filter";
 
 function BrowsePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [dogBreeds, setDogBreeds] = useState([]);
-  const [selectedBreeds, setSelectedBreeds] = useState([]);
+
+  const initialOptions = {
+    breeds: [] as string[],
+    sort: "breed:asc",
+    resultsPerPage: 25,
+    ageRange: [0, 14],
+  };
+  const [filters, setFilters] = useState(initialOptions);
+
   const [filteredDogs, setFilteredDogs] = useState([]);
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,13 +36,16 @@ function BrowsePage() {
       setIsLoading(true);
       try {
         let url = "https://frontend-take-home-service.fetch.com/dogs/search?";
-        selectedBreeds.forEach((breed) => (url += `&breeds=${breed}`));
-        url += "&sort=breed:asc";
-        url += `&from=${(currentPage - 1) * 25}`;
+        filters.breeds.forEach((breed) => (url += `&breeds=${breed}`));
+        url += `&sort=${filters.sort}`;
+        url += `&from=${(currentPage - 1) * filters.resultsPerPage}`;
+        url += `&size=${filters.resultsPerPage}`;
+        url += `&ageMin=${filters.ageRange[0]}`;
+        url += `&ageMax=${filters.ageRange[1]}`;
         const response = await fetch(url, { credentials: "include" });
         if (!response.ok) throw new Error("Failed to fetch dog IDs");
         const resData = await response.json();
-        setPages(Math.ceil(resData.total / 25));
+        setPages(Math.ceil(resData.total / filters.resultsPerPage));
 
         const dogIds = resData.resultIds;
         const dogResponse = await fetch("https://frontend-take-home-service.fetch.com/dogs", {
@@ -60,17 +71,20 @@ function BrowsePage() {
     }
 
     fetchDogs();
-  }, [selectedBreeds, currentPage]);
+  }, [filters, currentPage]);
 
   useEffect(() => {
     setCurrentPage(1); // Reset page when filters change
-  }, [selectedBreeds]);
+  }, [filters]);
 
-  function handleSetBreeds(breeds) {
-    setSelectedBreeds(breeds);
+  function handleFilterChange(filters) {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...filters,
+    }));
   }
 
-  function handlePageChange(event: React.ChangeEvent<unknown>, value: number) {
+  function handlePageChange(_event: React.ChangeEvent<unknown>, value: number) {
     setCurrentPage(value);
   }
 
@@ -83,7 +97,7 @@ function BrowsePage() {
         </p>
       </div>
 
-      <Filter breeds={dogBreeds} onSetBreeds={handleSetBreeds} />
+      <Filter breeds={dogBreeds} onSetOptions={handleFilterChange} initialOptions={initialOptions} />
 
       {isLoading ? (
         <div className="flex items-center justify-center flex-grow ">
@@ -96,7 +110,7 @@ function BrowsePage() {
             count={pages}
             page={currentPage}
             onChange={handlePageChange}
-            className="flex justify-center pb-10"
+            className="flex justify-center py-6"
           />
         </>
       ) : (
