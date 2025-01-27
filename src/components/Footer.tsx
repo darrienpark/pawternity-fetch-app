@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
 
         {/* Technologies Used */}
-        <p className="text-sm text-right">
+        <p className="text-sm text-center">
           Built using <span className="font-semibold">React</span>, <span className="font-semibold">Redux</span>,{" "}
           <span className="font-semibold">TypeScript</span>, <span className="font-semibold">Vite</span>,{" "}
           <span className="font-semibold">TailwindCSS</span>, and <span className="font-semibold">MUI</span>.

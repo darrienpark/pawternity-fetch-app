@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import DogList from "../components/dogs/DogList";
 import Filter from "../components/filter/Filter";
 import NoResults from "../components/NoResults";
+import Layout from "../components/Layout";
 
 function BrowsePage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -90,32 +91,34 @@ function BrowsePage() {
   }
 
   return (
-    <div className="flex-grow flex flex-col">
-      <div className="my-8">
-        <p className="text-3xl font-bold text-gray-800 text-left">Meet Your New Best Friend</p>
-        <p className="text-lg text-gray-600 mt-2 text-left">
-          Explore our collection of dogs looking for their next forever home.
-        </p>
+    <Layout>
+      <div className="flex-grow flex flex-col">
+        <div className="my-8">
+          <p className="text-3xl font-bold text-gray-800 text-left">Meet Your New Best Friend</p>
+          <p className="text-lg text-gray-600 mt-2 text-left">
+            Explore our collection of dogs looking for their next forever home.
+          </p>
+        </div>
+
+        <Filter breeds={dogBreeds} onSetOptions={handleFilterChange} initialOptions={initialOptions} />
+
+        {isLoading ? (
+          <div className="flex items-center justify-center flex-grow ">
+            <CircularProgress size="lg" />
+          </div>
+        ) : filteredDogs.length > 0 ? (
+          <div className="flex flex-col items-center gap-6 pb-8">
+            <DogList data={filteredDogs} />
+            <Pagination count={pages} page={currentPage} onChange={handlePageChange} />
+          </div>
+        ) : (
+          <NoResults
+            title="No Dogs Found"
+            description="We couldn’t find any pups matching your search. Try adjusting your filters or check back later for new arrivals!"
+          />
+        )}
       </div>
-
-      <Filter breeds={dogBreeds} onSetOptions={handleFilterChange} initialOptions={initialOptions} />
-
-      {isLoading ? (
-        <div className="flex items-center justify-center flex-grow ">
-          <CircularProgress size="lg" />
-        </div>
-      ) : filteredDogs.length > 0 ? (
-        <div className="flex flex-col items-center gap-6 pb-8">
-          <DogList data={filteredDogs} />
-          <Pagination count={pages} page={currentPage} onChange={handlePageChange} />
-        </div>
-      ) : (
-        <NoResults
-          title="No Dogs Found"
-          description="We couldn’t find any pups matching your search. Try adjusting your filters or check back later for new arrivals!"
-        />
-      )}
-    </div>
+    </Layout>
   );
 }
 

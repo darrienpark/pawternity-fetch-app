@@ -1,4 +1,4 @@
-import Header from "../components/Navbar";
+import Header from "../components/header/Navbar";
 
 export default function ErrorPage() {
   return (
