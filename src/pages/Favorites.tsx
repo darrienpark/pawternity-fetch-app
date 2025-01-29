@@ -63,7 +63,7 @@ function Favorites() {
         ) : (
           <NoResults
             title="No Favorites Yet"
-            description="Start exploring and find the perfect companion to add to your favorites!"
+            description="Browse through our selection of pups and add them to your favorites to get started!"
           />
         )}
       </div>
