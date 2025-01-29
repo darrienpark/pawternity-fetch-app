@@ -1,11 +1,12 @@
-import { Outlet, useLoaderData, useSubmit } from "react-router-dom";
-import Header from "../components/header/Navbar";
 import { useEffect } from "react";
-import { getTokenDuration } from "../util/auth";
+import { Outlet, useSubmit } from "react-router-dom";
 import Footer from "../components/Footer";
+import Header from "../components/header/Navbar";
+import { useAppSelector } from "../hooks/hooks";
+import { getTokenDuration } from "../util/auth";
 
 export default function RootLayout() {
-  const isAuthenticated = useLoaderData();
+  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
   const submit = useSubmit();
 
   useEffect(() => {

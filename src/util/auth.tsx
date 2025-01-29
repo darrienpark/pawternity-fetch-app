@@ -11,13 +11,13 @@ export function getTokenDuration() {
   return duration;
 }
 
-export function isAuthenticated() {
+export function isSessionValid() {
   const duration = getTokenDuration();
   return duration && duration > 0 ? true : false;
 }
 
-export function checkAuthLoader() {
-  if (!isAuthenticated()) {
+export function requireAuthLoader() {
+  if (!isSessionValid()) {
     return redirect("/login");
   }
 

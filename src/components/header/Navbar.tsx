@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { useRouteLoaderData } from "react-router-dom";
+import { useAppSelector } from "../../hooks/hooks";
 import LogoLink from "./LogoLink";
 import PageLink from "./PageLink";
 import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
 
 export default function Navbar() {
-  const isAuthenticated = useRouteLoaderData("root");
+  const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {

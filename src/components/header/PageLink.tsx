@@ -12,8 +12,8 @@ function PageLink({ to, label, onClick }: PageLinkProps) {
       to={to}
       onClick={onClick}
       className={({ isActive }) =>
-        `text-lg text-gray-800 ${
-          isActive ? "font-bold text-[#205036]" : ""
+        `text-lg ${
+          isActive ? "font-bold text-[#205036]" : "text-gray-800"
         } w-full text-center py-1 px-3 rounded-lg hover:bg-[#ffbe83] sm:hover:bg-transparent transition-colors duration-200`
       }
     >

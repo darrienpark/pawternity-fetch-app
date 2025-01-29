@@ -1,4 +1,6 @@
 import { redirect } from "react-router-dom";
+import store from "../store/store"; // Import the Redux store
+import { authActions } from "../store/store";
 
 export async function action({ request }: { request: Request }) {
   const data = await request.formData();
@@ -28,9 +30,12 @@ export async function action({ request }: { request: Request }) {
     });
   }
 
+  // Store token expiration in local storage to prevent loss on refresh
   const expiration = new Date();
   expiration.setHours(expiration.getHours() + 1);
   localStorage.setItem("expiration", expiration.toISOString());
+
+  store.dispatch(authActions.login());
 
   return redirect("/browse");
 }

@@ -7,7 +7,7 @@ import Favorites from "./pages/Favorites";
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import RootLayout from "./pages/Root";
-import { checkAuthLoader, isAuthenticated } from "./util/auth";
+import { requireAuthLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
@@ -15,10 +15,9 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     id: "root",
-    loader: isAuthenticated,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "browse", element: <BrowsePage />, loader: checkAuthLoader },
+      { path: "browse", element: <BrowsePage />, loader: requireAuthLoader },
       { path: "favorites", element: <Favorites /> },
       { path: "login", element: <LoginPage />, action: loginAction },
       { path: "logout", action: logoutAction },

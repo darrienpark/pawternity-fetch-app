@@ -1,8 +1,9 @@
 import { redirect } from "react-router-dom";
-import { isAuthenticated } from "../util/auth";
+import { isSessionValid } from "../util/auth";
+import store, { authActions } from "../store/store";
 
 export async function action() {
-  if (isAuthenticated()) {
+  if (isSessionValid()) {
     const response = await fetch("https://frontend-take-home-service.fetch.com/auth/logout", {
       method: "POST",
       credentials: "include",
@@ -16,6 +17,8 @@ export async function action() {
   }
 
   localStorage.removeItem("expiration");
+
+  store.dispatch(authActions.logout());
 
   return redirect("/login");
 }
