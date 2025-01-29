@@ -3,17 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function SignInButton() {
   return (
-    <Button
-      component={NavLink}
-      to="/login"
-      variant="solid"
-      sx={{
-        backgroundColor: "#193d2a",
-        "&:hover": {
-          backgroundColor: "#205036",
-        },
-      }}
-    >
+    <Button component={NavLink} to="/login" variant="solid" color="primary">
       Sign In
     </Button>
   );

@@ -6,7 +6,7 @@ import Filter from "../components/filter/Filter";
 import NoResults from "../components/NoResults";
 import Layout from "../components/Layout";
 
-function BrowsePage() {
+const BrowsePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [dogBreeds, setDogBreeds] = useState([]);
 
@@ -14,7 +14,7 @@ function BrowsePage() {
     breeds: [] as string[],
     sort: "breed:asc",
     resultsPerPage: 25,
-    ageRange: [0, 14],
+    ageRange: [0, 20],
   };
   const [filters, setFilters] = useState(initialOptions);
 
@@ -62,7 +62,7 @@ function BrowsePage() {
         const dogData = await dogResponse.json();
 
         // Test delay to show loading state
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // await new Promise((resolve) => setTimeout(resolve, 1000));
 
         setFilteredDogs(dogData);
       } catch (error) {
@@ -94,7 +94,7 @@ function BrowsePage() {
     <Layout>
       <div className="flex-grow flex flex-col">
         <div className="my-8">
-          <p className="text-3xl font-bold text-gray-800 text-left">Meet Your New Best Friend</p>
+          <p className="text-3xl font-bold text-gray-800 text-left">Meet your new best friend</p>
           <p className="text-lg text-gray-600 mt-2 text-left">
             Explore our collection of dogs looking for their next forever home.
           </p>
@@ -120,6 +120,6 @@ function BrowsePage() {
       </div>
     </Layout>
   );
-}
+};
 
 export default BrowsePage;

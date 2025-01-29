@@ -18,17 +18,7 @@ export default function LoginForm() {
           <Input id="email" type="email" name="email" placeholder="Enter your email" required className="w-full" />
         </div>
         <div className="mt-6">
-          <Button
-            sx={{
-              backgroundColor: "#193d2a",
-              "&:hover": {
-                backgroundColor: "#205036",
-              },
-            }}
-            type="submit"
-            variant="solid"
-            className="w-full bg-[#193d2a]"
-          >
+          <Button type="submit" variant="solid" className="w-full" color="primary">
             Sign In
           </Button>
         </div>
