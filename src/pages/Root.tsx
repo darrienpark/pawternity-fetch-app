@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Outlet, useSubmit } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/header/Navbar";
-import { useAppSelector } from "../hooks/hooks";
+import { useAppSelector } from "../hooks/useStoreHooks";
 import { getTokenDuration } from "../util/auth";
 
 export default function RootLayout() {

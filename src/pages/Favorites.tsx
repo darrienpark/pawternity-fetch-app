@@ -7,7 +7,7 @@ import PaginationControls from "../components/dogs/PaginationControls";
 import Layout from "../components/Layout";
 import NoResults from "../components/NoResults";
 import NotificationSnackbar from "../components/NotificationSnackbar";
-import { useAppSelector } from "../hooks/hooks";
+import { useAppSelector } from "../hooks/useStoreHooks";
 import { useFetchMatch } from "../hooks/useFetchMatch";
 import { usePaginationClient } from "../hooks/usePaginationClient";
 
