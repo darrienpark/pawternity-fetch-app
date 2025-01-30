@@ -7,14 +7,18 @@ import PaginationControls from "../components/dogs/PaginationControls";
 import Layout from "../components/Layout";
 import NoResults from "../components/NoResults";
 import NotificationSnackbar from "../components/NotificationSnackbar";
-import { useAppSelector, usePagination } from "../hooks/hooks";
-import { useMatch } from "../hooks/useMatch";
+import { useAppSelector } from "../hooks/hooks";
+import { useFetchMatch } from "../hooks/useFetchMatch";
+import { usePaginationClient } from "../hooks/usePaginationClient";
 
 function Favorites() {
   const favorites = useAppSelector((state) => state.favorites.favorites);
   const [pageSize, setPageSize] = useState(25);
-  const { paginatedItems, currentPage, handlePageChange, totalPages, start, end } = usePagination(favorites, pageSize);
-  const { match, modalOpen, isLoading, error, setError, findBestMatch, setModalOpen } = useMatch(favorites);
+  const { paginatedItems, currentPage, handlePageChange, totalPages, start, end } = usePaginationClient(
+    favorites,
+    pageSize
+  );
+  const { match, modalOpen, isLoading, error, setError, findBestMatch, setModalOpen } = useFetchMatch(favorites);
 
   return (
     <Layout>

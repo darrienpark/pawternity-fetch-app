@@ -3,7 +3,7 @@ import { Dog } from "../models/dog";
 
 const MATCH_API_URL = "https://frontend-take-home-service.fetch.com/dogs/match";
 
-export const useMatch = (favorites: Dog[]) => {
+export const useFetchMatch = (favorites: Dog[]) => {
   const [match, setMatch] = useState<Dog | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);

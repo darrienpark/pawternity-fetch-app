@@ -16,7 +16,7 @@ type SortOption = "breed:asc" | "breed:desc" | "name:asc" | "name:desc" | "age:a
 
 type FilterProps = {
   breeds: string[];
-  onSetOptions: (options: FilterOptions) => void;
+  onSetOptions: (newFilters: FilterOptions) => void;
   initialOptions: FilterOptions;
 };
 
