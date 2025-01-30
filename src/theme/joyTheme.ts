@@ -6,6 +6,8 @@ const palette = {
     solidBg: "#193d2a",
     solidHoverBg: "#205036",
     plainColor: "#205036",
+    plainHoverBg: "#ffbe83",
+    plainActiveBg: "#ffb069",
   },
   neutral: {
     solidColor: "#205036",
@@ -20,7 +22,6 @@ const joyTheme = extendTheme({
   },
   components: {
     JoyButton: {
-      // ✅ Fixed incorrect component key (JoyButton → Button)
       styleOverrides: {
         root: {
           whiteSpace: "nowrap",
