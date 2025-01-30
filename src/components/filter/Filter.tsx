@@ -1,35 +1,21 @@
 import { Button } from "@mui/joy";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { FilterOptions } from "../../models/types";
 import AgeRangeSlider from "./AgeRangeSlider";
 import BreedSelector from "./BreedSelector";
-import SizeSelector from "./SizeSelector";
 import SortSelector from "./SortSelector";
-
-type FilterOptions = {
-  breeds: string[];
-  sort: SortOption;
-  resultsPerPage: number;
-  ageRange: number[];
-};
-
-type SortOption = "breed:asc" | "breed:desc" | "name:asc" | "name:desc" | "age:asc" | "age:desc";
 
 type FilterProps = {
   breeds: string[];
-  onSetOptions: (newFilters: FilterOptions) => void;
-  initialOptions: FilterOptions;
+  filters: FilterOptions; // your "current" state from parent
+  onChange: (newFilters: FilterOptions) => void;
 };
 
-const Filter = ({ breeds, onSetOptions, initialOptions }: FilterProps) => {
-  const queryOptions = useRef(initialOptions);
+const Filter = ({ breeds, filters, onChange }: FilterProps) => {
   const [moreOptions, setMoreOptions] = useState(false);
 
-  function handleInputChange<T extends keyof typeof queryOptions.current>(
-    field: T,
-    value: (typeof queryOptions.current)[T]
-  ) {
-    queryOptions.current[field] = value;
-    onSetOptions(queryOptions.current);
+  function handleInputChange<T extends keyof FilterOptions>(field: T, value: FilterOptions[T]) {
+    onChange({ ...filters, [field]: value });
   }
 
   return (
@@ -37,7 +23,7 @@ const Filter = ({ breeds, onSetOptions, initialOptions }: FilterProps) => {
       <div className="flex pb-4 gap-x-2 gap-y-2 flex-wrap">
         <BreedSelector
           breeds={breeds}
-          selectedBreeds={queryOptions.current.breeds}
+          selectedBreeds={filters.breeds}
           onChange={(value) => handleInputChange("breeds", value)}
         />
         <Button variant="plain" onClick={() => setMoreOptions((prev) => !prev)}>
@@ -47,18 +33,11 @@ const Filter = ({ breeds, onSetOptions, initialOptions }: FilterProps) => {
 
       {moreOptions && (
         <div className="flex flex-col items-start sm:flex-row sm:items-center pb-4 gap-x-4 gap-y-4 justify-end flex-wrap">
-          <SortSelector
-            sort={queryOptions.current.sort}
-            onChange={(value) => handleInputChange("sort", value as SortOption)}
-          />
-          <SizeSelector
-            size={queryOptions.current.resultsPerPage}
-            onChange={(value) => handleInputChange("resultsPerPage", value)}
-          />
+          <SortSelector sort={filters.sort} onChange={(value) => handleInputChange("sort", value)} />
           <AgeRangeSlider
-            range={queryOptions.current.ageRange}
-            min={initialOptions.ageRange[0]}
-            max={initialOptions.ageRange[1]}
+            range={filters.ageRange}
+            min={0}
+            max={20}
             onChange={(value) => handleInputChange("ageRange", value)}
           />
         </div>

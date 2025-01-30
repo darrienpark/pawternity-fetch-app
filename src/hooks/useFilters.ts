@@ -1,6 +1,6 @@
 // hooks/useFilters.ts
 import { useState } from "react";
-import { FilterOptions } from "../util/types";
+import { FilterOptions } from "../models/types";
 
 const initialOptions: FilterOptions = {
   breeds: [] as string[],

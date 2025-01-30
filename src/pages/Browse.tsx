@@ -10,12 +10,6 @@ import { useFetchDogs } from "../hooks/useFetchDogs";
 import { useFilters } from "../hooks/useFilters";
 
 const BrowsePage = () => {
-  const initialOptions = {
-    breeds: [] as string[],
-    sort: "breed:asc",
-    resultsPerPage: 25,
-    ageRange: [0, 20],
-  };
   const [currentPage, setCurrentPage] = useState(1);
 
   const { filters, handleFilterChange } = useFilters();
@@ -43,7 +37,7 @@ const BrowsePage = () => {
           </p>
         </div>
 
-        <Filter breeds={breeds} onSetOptions={handleFilterChange} initialOptions={initialOptions} />
+        <Filter breeds={breeds} filters={filters} onChange={handleFilterChange} />
 
         {isLoading ? (
           <div className="flex items-center justify-center flex-grow ">

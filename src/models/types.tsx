@@ -3,7 +3,7 @@ export interface FilterOptions {
   breeds: string[];
   sort: string;
   resultsPerPage: number;
-  ageRange: [number, number];
+  ageRange: number[];
 }
 
 export interface Dog {
