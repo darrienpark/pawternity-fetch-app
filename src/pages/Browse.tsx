@@ -1,31 +1,27 @@
 import { CircularProgress } from "@mui/joy";
 import { Pagination } from "@mui/material";
-import { useEffect, useState } from "react";
 import DogList from "../components/dogs/DogList";
+import PaginationControls from "../components/dogs/PaginationControls";
 import Filter from "../components/filter/Filter";
 import Layout from "../components/Layout";
 import NoResults from "../components/NoResults";
 import { useFetchBreeds } from "../hooks/useFetchBreeds";
-import { useFetchDogs } from "../hooks/useFetchDogs";
 import { useFilters } from "../hooks/useFilters";
+import { usePaginationServer } from "../hooks/usePaginationServer";
 
 const BrowsePage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const { filters, handleFilterChange } = useFilters();
-
-  const { breeds, isLoading: breedsLoading } = useFetchBreeds();
-  const { dogs: filteredDogs, pages, isLoading: dogsLoading } = useFetchDogs(filters, currentPage);
-
-  const isLoading = breedsLoading || dogsLoading;
-
-  useEffect(() => {
-    setCurrentPage(1); // Reset page when filters change
-  }, [filters]);
-
-  function handlePageChange(_event: React.ChangeEvent<unknown>, value: number) {
-    setCurrentPage(value);
-  }
+  const { filters, handleFilterChange, updatePageSize } = useFilters();
+  const { breeds, isLoading: isBreedsLoading } = useFetchBreeds();
+  const {
+    currentPage,
+    start,
+    end,
+    totalResults,
+    pages,
+    dogs: filteredDogs,
+    isLoading: isDogsLoading,
+    handlePageChange,
+  } = usePaginationServer(filters);
 
   return (
     <Layout>
@@ -39,12 +35,19 @@ const BrowsePage = () => {
 
         <Filter breeds={breeds} filters={filters} onChange={handleFilterChange} />
 
-        {isLoading ? (
+        {isBreedsLoading || isDogsLoading ? (
           <div className="flex items-center justify-center flex-grow ">
             <CircularProgress size="lg" />
           </div>
         ) : filteredDogs.length > 0 ? (
-          <div className="flex flex-col items-center gap-6 pb-8">
+          <div className="flex flex-col items-center gap-4 pb-8">
+            <PaginationControls
+              start={start}
+              end={end}
+              totalItems={totalResults}
+              pageSize={filters.resultsPerPage}
+              onPageSizeChange={updatePageSize}
+            />
             <DogList data={filteredDogs} />
             <Pagination count={pages} page={currentPage} onChange={handlePageChange} />
           </div>

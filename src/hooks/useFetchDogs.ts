@@ -1,35 +1,52 @@
 // useFetchDogs.ts
 import { useEffect, useState } from "react";
+import { FilterOptions } from "../models/types";
+import { Dog } from "../models/dog";
 
-export function useFetchDogs(filters, currentPage) {
-  const [dogs, setDogs] = useState([]);
+export function useFetchDogs(filters: FilterOptions, currentPage: number) {
+  const [dogs, setDogs] = useState<Dog[]>([]);
   const [pages, setPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [totalResults, setTotalResults] = useState(0);
 
   useEffect(() => {
     async function fetchDogs() {
       setIsLoading(true);
+
       try {
-        let url = "https://frontend-take-home-service.fetch.com/dogs/search?";
-        filters.breeds.forEach((breed: string) => (url += `&breeds=${breed}`));
-        url += `&sort=${filters.sort}`;
-        url += `&from=${(currentPage - 1) * filters.resultsPerPage}`;
-        url += `&size=${filters.resultsPerPage}`;
-        url += `&ageMin=${filters.ageRange[0]}`;
-        url += `&ageMax=${filters.ageRange[1]}`;
+        const { breeds, sort, resultsPerPage, ageRange } = filters;
 
-        const response = await fetch(url, { credentials: "include" });
-        if (!response.ok) throw new Error("Failed to fetch dog IDs");
-        const resData = await response.json();
-        setPages(Math.ceil(resData.total / filters.resultsPerPage));
+        // Build query with URLSearchParams
+        const params = new URLSearchParams();
+        breeds.forEach((breed) => params.append("breeds", breed));
+        params.set("sort", sort);
+        params.set("from", String((currentPage - 1) * resultsPerPage));
+        params.set("size", String(resultsPerPage));
+        params.set("ageMin", String(ageRange[0]));
+        params.set("ageMax", String(ageRange[1]));
 
-        const dogIds = resData.resultIds;
+        const searchUrl = `https://frontend-take-home-service.fetch.com/dogs/search?${params.toString()}`;
+        const searchResponse = await fetch(searchUrl, { credentials: "include" });
+        if (!searchResponse.ok) {
+          throw new Error("Failed to fetch dog IDs");
+        }
+
+        const { resultIds, total } = await searchResponse.json();
+        setTotalResults(total);
+        setPages(Math.ceil(total / resultsPerPage));
+
+        // Fetch actual dog data by IDs
         const dogResponse = await fetch("https://frontend-take-home-service.fetch.com/dogs", {
           headers: { "Content-Type": "application/json" },
           method: "POST",
           credentials: "include",
-          body: JSON.stringify(dogIds),
+          body: JSON.stringify(resultIds),
         });
+
+        if (!dogResponse.ok) {
+          throw new Error("Failed to fetch dog data");
+        }
+
         const dogData = await dogResponse.json();
         setDogs(dogData);
       } catch (error) {
@@ -38,8 +55,9 @@ export function useFetchDogs(filters, currentPage) {
         setIsLoading(false);
       }
     }
+
     fetchDogs();
   }, [filters, currentPage]);
 
-  return { dogs, pages, isLoading };
+  return { dogs, totalResults, pages, isLoading };
 }

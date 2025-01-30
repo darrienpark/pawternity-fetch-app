@@ -18,5 +18,9 @@ export const useFilters = () => {
     });
   };
 
-  return { filters, handleFilterChange };
+  const updatePageSize = (newSize: number) => {
+    setFilters((prev) => ({ ...prev, resultsPerPage: newSize }));
+  };
+
+  return { filters, handleFilterChange, updatePageSize };
 };
