@@ -5,6 +5,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import WarningIcon from "@mui/icons-material/Warning";
 
 type NotificationSnackbarProps = {
+  autohideDuration?: number;
   message: string | null;
   open: boolean;
   onClose: () => void;
@@ -18,9 +19,16 @@ const iconMap = {
   warning: <WarningIcon />,
 };
 
-const NotificationSnackbar = ({ message, open, onClose, variant = "info" }: NotificationSnackbarProps) => {
+const NotificationSnackbar = ({
+  autohideDuration,
+  message,
+  open,
+  onClose,
+  variant = "info",
+}: NotificationSnackbarProps) => {
   return (
     <Snackbar
+      autoHideDuration={autohideDuration}
       open={open}
       variant="solid"
       color={variant as SnackbarProps["color"]}

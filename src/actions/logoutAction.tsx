@@ -14,11 +14,14 @@ export async function action() {
         status: 500,
       });
     }
+
+    store.dispatch(authActions.setSnackbar({ type: "success", message: "You have logged out successfully" }));
+  } else {
+    store.dispatch(
+      authActions.setSnackbar({ type: "warning", message: "Session timed out. Please sign in again to continue" })
+    );
   }
-
   localStorage.removeItem("expiration");
-
   store.dispatch(authActions.logout());
-
-  return redirect("/login");
+  return redirect("/");
 }

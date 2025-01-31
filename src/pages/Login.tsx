@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@mui/joy";
-import LoginForm from "../components/LoginForm";
 import dogwalkset2 from "../assets/dogwalkbackground.jpg";
 import Layout from "../components/Layout";
+import LoginForm from "../components/LoginForm";
 
 const LoginPage = () => {
   return (

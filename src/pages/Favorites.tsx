@@ -23,27 +23,30 @@ function Favorites() {
   return (
     <Layout>
       <div className="flex-grow flex flex-col">
-        <div className="mt-8">
-          <h1 className="text-3xl font-bold text-gray-800">Your favorite pals</h1>
+        <div className="my-8">
+          <h1 className="text-4xl text-gray-800">Your favorite pals</h1>
           <p className="text-lg text-gray-600 my-2">
             Some fur-iends that stuck out to you, ready to be the next addition to your family.
           </p>
+          {favorites.length > 0 && (
+            <>
+              <Button
+                size="lg"
+                variant="solid"
+                onClick={findBestMatch}
+                loading={isLoading}
+                className="w-full sm:w-auto"
+                color="primary"
+              >
+                Find your perfect companion!
+              </Button>
+              <MatchModal open={modalOpen} onClose={() => setModalOpen(false)} match={match} />
+            </>
+          )}
         </div>
 
         {favorites.length > 0 ? (
           <div className="flex flex-col items-start gap-4 pb-8">
-            <Button
-              size="lg"
-              variant="solid"
-              onClick={findBestMatch}
-              loading={isLoading}
-              className="w-full sm:w-auto"
-              color="primary"
-            >
-              Find your perfect companion!
-            </Button>
-            <MatchModal open={modalOpen} onClose={() => setModalOpen(false)} match={match} />
-
             <PaginationControls
               start={start}
               end={end}

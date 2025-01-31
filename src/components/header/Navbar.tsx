@@ -1,11 +1,12 @@
-import { FaBars, FaTimes } from "react-icons/fa";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useNavbarState } from "../../hooks/useNavbarState";
+import { useAppSelector } from "../../hooks/useStoreHooks";
 import LogoLink from "./LogoLink";
 import MobileMenu from "./MobileMenu";
 import PageLink from "./PageLink";
 import SignInButton from "./SignInButton";
 import SignOutButton from "./SignOutButton";
-import { useAppSelector } from "../../hooks/useStoreHooks";
 
 export default function Navbar() {
   const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
@@ -18,7 +19,7 @@ export default function Navbar() {
 
         {isAuthenticated && (
           <button onClick={toggleMenu} className="sm:hidden p-2 focus:outline-none" aria-label="Toggle Menu">
-            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
         )}
 

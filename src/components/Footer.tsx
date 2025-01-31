@@ -1,13 +1,12 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 export default function Footer() {
   return (
     <footer className="bg-[#193d2a] text-white py-6">
       <div className="max-w-7xl mx-auto px-4 flex flex-col items-center space-y-4">
-        {/* Author Name */}
         <p className="text-lg font-semibold">Darrien Park</p>
 
-        {/* Social Media Links */}
         <div className="flex space-x-6">
           <a
             href="https://www.linkedin.com/in/darrien-park/"
@@ -16,7 +15,7 @@ export default function Footer() {
             className="hover:text-gray-300"
             aria-label="LinkedIn Profile"
           >
-            <FaLinkedin size={24} />
+            <LinkedInIcon fontSize="large" />
           </a>
           <a
             href="https://github.com/darrienpark"
@@ -25,11 +24,10 @@ export default function Footer() {
             className="hover:text-gray-300"
             aria-label="GitHub Profile"
           >
-            <FaGithub size={24} />
+            <GitHubIcon fontSize="large" />
           </a>
         </div>
 
-        {/* Technologies Used */}
         <p className="text-sm text-center">
           Built using <span className="font-semibold">React</span>, <span className="font-semibold">Redux</span>,{" "}
           <span className="font-semibold">TypeScript</span>, <span className="font-semibold">Vite</span>,{" "}

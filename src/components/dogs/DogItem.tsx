@@ -1,6 +1,6 @@
-import { FaHeart } from "react-icons/fa";
 import { Dog } from "../../models/dog";
 import { useFavorites } from "../../hooks/useFavorites";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function DogItem({ dog }: { dog: Dog }) {
   const { isFavorited, toggleFavorite } = useFavorites(dog);
@@ -19,18 +19,16 @@ export default function DogItem({ dog }: { dog: Dog }) {
       onKeyDown={handleKeyDown}
       onClick={toggleFavorite}
     >
-      {/* Image container with full card coverage */}
       <img src={dog.img} alt={dog.name} className="w-full h-full object-cover" />
 
-      {/* Favorite Heart Icon */}
-      {isFavorited && <FaHeart className="absolute top-3 right-3 text-red-500 w-6 h-6" aria-label="Favorited" />}
+      {isFavorited && (
+        <FavoriteIcon fontSize="large" className="absolute top-3 right-3 text-red-500 w-6 h-6" aria-label="Favorited" />
+      )}
 
-      {/* Title Section */}
       <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
         <h3 className="text-white text-lg font-semibold">{dog.name}</h3>
       </div>
 
-      {/* Hover Details */}
       <div className="absolute -bottom-28 left-0 w-full bg-gray-900 text-white text-sm p-4 transform opacity-0 transition-all duration-300 group-hover:bottom-0 group-hover:opacity-100">
         <p>{`Age: ${dog.age}`}</p>
         <p>{`Breed: ${dog.breed}`}</p>

@@ -27,7 +27,7 @@ const BrowsePage = () => {
     <Layout>
       <div className="flex-grow flex flex-col">
         <div className="my-8">
-          <p className="text-3xl font-bold text-gray-800 text-left">Meet your new best friend</p>
+          <p className="text-4xl text-gray-800 text-left">Meet your new best friend</p>
           <p className="text-lg text-gray-600 mt-2 text-left">
             Explore our collection of dogs looking for their next forever home.
           </p>

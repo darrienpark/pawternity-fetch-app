@@ -21,7 +21,7 @@ const MatchModal = ({ open, onClose, match }: MatchModalProps) => {
           <ModalClose className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" aria-label="Close" />
           <Sheet className="relative max-w-lg w-full rounded-lg p-0 sm:p-5">
             {match && (
-              <div className="flex flex-col gap-y-4">
+              <div className="flex flex-col gap-y-4 text-lg">
                 <h1 className="text-4xl font-bold">It's a match!</h1>
                 <p>
                   Great news! You've successfully matched with {match.name}. Learn more about your new companion below.

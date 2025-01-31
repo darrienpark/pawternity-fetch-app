@@ -10,16 +10,16 @@ type PaginationControlsProps = {
 
 const PaginationControls = ({ start, end, totalItems, pageSize, onPageSizeChange }: PaginationControlsProps) => {
   return (
-    <div className="flex w-full justify-between items-center">
+    <div className="w-full flex flex-col-reverse gap-y-4 justify-between items-center sm:flex-row">
       <p>
         Showing {start}—{end} of {totalItems}
       </p>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-col sm:flex-row w-full sm:w-auto">
         <label>Results per page</label>
         <Select
           value={pageSize}
           onChange={(_, value) => onPageSizeChange(value as number)}
-          className="px-2 w-full sm:w-auto flex-grow md:flex-grow-0"
+          className="w-full sm:flex-auto sm:w-auto"
         >
           <Option value={25}>25</Option>
           <Option value={50}>50</Option>

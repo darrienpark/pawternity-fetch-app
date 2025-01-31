@@ -23,12 +23,19 @@ const favoritesSlice = createSlice({
   },
 });
 
+type SnackbarProps = {
+  type: "danger" | "success" | "info" | "warning";
+  message: string;
+};
+
 type AuthState = {
   isAuthenticated: boolean;
+  snackbar: SnackbarProps | null;
 };
 
 const initialAuthState: AuthState = {
   isAuthenticated: isSessionValid() ? true : false,
+  snackbar: null,
 };
 
 const authSlice = createSlice({
@@ -40,6 +47,9 @@ const authSlice = createSlice({
     },
     logout(state) {
       state.isAuthenticated = false;
+    },
+    setSnackbar(state, action: PayloadAction<SnackbarProps | null>) {
+      state.snackbar = action.payload;
     },
   },
 });
