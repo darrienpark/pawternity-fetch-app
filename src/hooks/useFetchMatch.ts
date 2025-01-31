@@ -19,8 +19,6 @@ export const useFetchMatch = (favorites: Dog[]) => {
 
     if (!response.ok) throw new Error("Failed to fetch match");
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     return response.json();
   };
 

@@ -1,5 +1,5 @@
 import { Button } from "@mui/joy";
-import HeroBackground from "../assets/HeroBackground.jpeg";
+import HeroBackground from "../assets/HeroBackground.webp";
 import { NavLink } from "react-router-dom";
 import Layout from "./Layout";
 
