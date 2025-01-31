@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@mui/joy";
-import dogwalkset2 from "../assets/dogwalkbackground.jpg";
+import bg from "../assets/dogwalkbackground.webp";
 import Layout from "../components/Layout";
 import LoginForm from "../components/LoginForm";
 
@@ -7,7 +7,7 @@ const LoginPage = () => {
   return (
     <div
       className="flex flex-col flex-grow justify-center items-center bg-cover bg-center"
-      style={{ backgroundImage: `url(${dogwalkset2})` }}
+      style={{ backgroundImage: `url(${bg})` }}
     >
       <Layout>
         <Card className="w-full max-w-md m-auto">
