@@ -1,4 +1,4 @@
-import { Dog } from "../../models/dog";
+import { Dog } from "../../models/types";
 import DogItem from "./DogItem";
 
 function DogList({ data }: { data: Dog[] }) {

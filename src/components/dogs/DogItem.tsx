@@ -1,4 +1,4 @@
-import { Dog } from "../../models/dog";
+import { Dog } from "../../models/types";
 import { useFavorites } from "../../hooks/useFavorites";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 

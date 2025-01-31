@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { Dog } from "../models/dog";
 import { favoritesActions } from "../store/store";
 import { useAppDispatch, useAppSelector } from "./useStoreHooks";
+import { Dog } from "../models/types";
 
 export function useFavorites(dog: Dog) {
   const dispatch = useAppDispatch();
@@ -10,7 +10,6 @@ export function useFavorites(dog: Dog) {
 
   const toggleFavorite = useCallback(() => {
     if (!isFavorited) {
-      console.log(`Added ${dog.name} to favorites!`);
       dispatch(favoritesActions.add(dog));
     } else {
       dispatch(favoritesActions.remove(dog.id));

@@ -1,5 +1,5 @@
 import { Modal, ModalClose, ModalDialog, ModalOverflow, Sheet } from "@mui/joy";
-import { Dog } from "../../models/dog";
+import { Dog } from "../../models/types";
 
 interface MatchModalProps {
   open: boolean;

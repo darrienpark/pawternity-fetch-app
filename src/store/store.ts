@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Dog } from "../models/dog";
 import { isSessionValid } from "../util/auth";
+import { Dog } from "../models/types";
 
 type FavoritesState = {
   favorites: Dog[];

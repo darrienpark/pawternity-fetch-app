@@ -6,13 +6,6 @@ export interface FilterOptions {
   ageRange: number[];
 }
 
-export interface Dog {
-  id: string;
-  name: string;
-  breed: string;
-  age: number;
-}
-
 export interface Pagination {
   currentPage: number;
   totalPages: number;
@@ -22,3 +15,12 @@ export interface FetchDogsResponse {
   dogs: Dog[];
   totalPages: number;
 }
+
+export type Dog = {
+  id: string;
+  name: string;
+  img: string;
+  breed: string;
+  age: string;
+  zip_code: string;
+};
