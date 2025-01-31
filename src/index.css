@@ -7,7 +7,3 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
-
-.bg-login {
-  background: url("../assets/dogwalkbackground.jpg") no-repeat center center / cover;
-}
