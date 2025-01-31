@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dog } from "../models/dog";
+import { Dog } from "../models/types";
 
 const MATCH_API_URL = "https://frontend-take-home-service.fetch.com/dogs/match";
 

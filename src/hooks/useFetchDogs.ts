@@ -1,7 +1,6 @@
 // useFetchDogs.ts
 import { useEffect, useState } from "react";
-import { FilterOptions } from "../models/types";
-import { Dog } from "../models/dog";
+import { Dog, FilterOptions } from "../models/types";
 
 export function useFetchDogs(filters: FilterOptions, currentPage: number) {
   const [dogs, setDogs] = useState<Dog[]>([]);
