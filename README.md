@@ -1,10 +1,8 @@
-# Fetch Rewards Take-Home Assignment - Dog Adoption Platform
+# Fetch Rewards Take-Home Assignment - Pawternity Dog Adoption Platform
 
 ## Overview
 
 Pawternity is a web-based platform designed to help users find and adopt dogs from various shelters. The application provides an intuitive UI to browse available dogs, filter them based on breed, age, and size, and manage favorite selections.
-
----
 
 ## Technologies Used
 
@@ -13,8 +11,6 @@ Pawternity is a web-based platform designed to help users find and adopt dogs fr
 - **State Management**: React Context API
 - **API Handling**: Custom Hooks for fetching data
 - **Build Tooling**: ESLint, Prettier, Vite
-
----
 
 ## Installation
 
@@ -44,7 +40,3 @@ To get started with the project, follow these steps:
 ```bash
   http://localhost:5173
 ```
-
----
-
-## Coding Considerations
