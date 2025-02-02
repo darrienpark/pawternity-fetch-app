@@ -6,7 +6,7 @@ import store, { authActions } from "../store/store";
 export async function action() {
   try {
     if (isSessionValid()) {
-      const response = await fetch("https://frontend-take-home-service.fetch.com/auth/logout", {
+      const response = await fetch("/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -28,7 +28,7 @@ export async function action() {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
 
-    store.dispatch(authActions.setSnackbar({ type: "danger", message: `Logout failed: ${errorMessage}` }));
+    store.dispatch(authActions.setSnackbar({ type: "danger", message: errorMessage }));
 
     return redirect("/");
   }

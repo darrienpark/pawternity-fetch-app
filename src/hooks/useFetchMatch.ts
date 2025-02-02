@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Dog } from "../models/types";
 
-const MATCH_API_URL = "https://frontend-take-home-service.fetch.com/dogs/match";
-
 export const useFetchMatch = (favorites: Dog[]) => {
   const [match, setMatch] = useState<Dog | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -10,7 +8,7 @@ export const useFetchMatch = (favorites: Dog[]) => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchMatch = async (ids: string[]) => {
-    const response = await fetch(MATCH_API_URL, {
+    const response = await fetch("/api/dogs/match", {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       credentials: "include",

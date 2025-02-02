@@ -9,7 +9,7 @@ export async function action({ request }: { request: Request }) {
     email: data.get("email"),
   };
 
-  const response = await fetch("https://frontend-take-home-service.fetch.com/auth/login", {
+  const response = await fetch("/api/auth/login", {
     method: "POST",
     credentials: "include",
     headers: {

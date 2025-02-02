@@ -9,7 +9,7 @@ export function useFetchBreeds() {
     async function fetchBreeds() {
       setIsLoading(true);
       try {
-        const response = await fetch("https://frontend-take-home-service.fetch.com/dogs/breeds", {
+        const response = await fetch("/api/dogs/breeds", {
           credentials: "include",
         });
         const data = await response.json();

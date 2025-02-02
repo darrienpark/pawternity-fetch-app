@@ -24,7 +24,7 @@ export function useFetchDogs(filters: FilterOptions, currentPage: number) {
         params.set("ageMin", String(ageRange[0]));
         params.set("ageMax", String(ageRange[1]));
 
-        const searchUrl = `https://frontend-take-home-service.fetch.com/dogs/search?${params.toString()}`;
+        const searchUrl = `/api/dogs/search?${params.toString()}`;
         const searchResponse = await fetch(searchUrl, { credentials: "include" });
         if (!searchResponse.ok) {
           throw new Error("Failed to fetch dog IDs");
@@ -35,7 +35,7 @@ export function useFetchDogs(filters: FilterOptions, currentPage: number) {
         setPages(Math.ceil(total / resultsPerPage));
 
         // Fetch actual dog data by IDs
-        const dogResponse = await fetch("https://frontend-take-home-service.fetch.com/dogs", {
+        const dogResponse = await fetch("/api/dogs", {
           headers: { "Content-Type": "application/json" },
           method: "POST",
           credentials: "include",
