@@ -5,7 +5,7 @@ import WarningIcon from "@mui/icons-material/Warning";
 import { Button, Snackbar } from "@mui/joy";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/useStoreHooks";
-import { authActions } from "../store/store";
+import { notificationActions } from "../store/store";
 
 const iconMap = {
   danger: <ErrorIcon />,
@@ -14,9 +14,9 @@ const iconMap = {
   warning: <WarningIcon />,
 };
 
-const NotificationSnackbar = () => {
+const Notification = () => {
   const dispatch = useAppDispatch();
-  const notification = useAppSelector((state) => state.authentication.notification);
+  const notification = useAppSelector((state) => state.notification.notification);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const NotificationSnackbar = () => {
   };
 
   const handleUnmount = () => {
-    dispatch(authActions.clearNotification());
+    dispatch(notificationActions.clearNotification());
   };
 
   if (!notification) return null;
@@ -57,4 +57,4 @@ const NotificationSnackbar = () => {
   );
 };
 
-export default NotificationSnackbar;
+export default Notification;

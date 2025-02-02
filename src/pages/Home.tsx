@@ -1,7 +1,7 @@
 import Benefits from "../components/benefits/Benefits";
 import Hero from "../components/Hero";
 import Layout from "../components/Layout";
-import NotificationSnackbar from "../components/NotificationSnackbar";
+import NotificationSnackbar from "../components/Notification";
 
 const HomePage = () => {
   return (

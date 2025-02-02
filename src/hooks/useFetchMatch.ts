@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Dog } from "../models/types";
+import { notificationActions } from "../store/store";
+import { useAppDispatch } from "./useStoreHooks";
 
 export const useFetchMatch = (favorites: Dog[]) => {
   const [match, setMatch] = useState<Dog | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
 
   const fetchMatch = async (ids: string[]) => {
     const response = await fetch("/api/dogs/match", {
@@ -24,7 +26,6 @@ export const useFetchMatch = (favorites: Dog[]) => {
     if (favorites.length === 0) return;
 
     setIsLoading(true);
-    setError(null);
 
     try {
       const ids = favorites.map((dog) => dog.id);
@@ -34,12 +35,18 @@ export const useFetchMatch = (favorites: Dog[]) => {
 
       setMatch(matchedDog);
       setModalOpen(true);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "An unexpected error occurred");
+    } catch (error) {
+      dispatch(
+        notificationActions.setNotification({
+          icon: "danger",
+          color: "danger",
+          message: error instanceof Error ? error.message : "Unknown error occurred",
+        })
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { match, modalOpen, isLoading, error, setError, findBestMatch, setModalOpen };
+  return { match, modalOpen, isLoading, findBestMatch, setModalOpen };
 };

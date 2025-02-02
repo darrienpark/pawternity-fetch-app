@@ -31,12 +31,14 @@ type Notification = {
 
 type AuthState = {
   isAuthenticated: boolean;
+};
+
+type NotificationState = {
   notification: Notification | null;
 };
 
 const initialAuthState: AuthState = {
   isAuthenticated: isSessionValid() ? true : false,
-  notification: null,
 };
 
 const authSlice = createSlice({
@@ -49,6 +51,17 @@ const authSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
+  },
+});
+
+const initialNotificationState: NotificationState = {
+  notification: null,
+};
+
+const notificationSlice = createSlice({
+  name: "notification",
+  initialState: initialNotificationState,
+  reducers: {
     setNotification(state, action: PayloadAction<Notification | null>) {
       state.notification = action.payload;
     },
@@ -62,6 +75,7 @@ const store = configureStore({
   reducer: {
     favorites: favoritesSlice.reducer,
     authentication: authSlice.reducer,
+    notification: notificationSlice.reducer,
   },
 });
 
@@ -69,5 +83,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const favoritesActions = favoritesSlice.actions;
 export const authActions = authSlice.actions;
+export const notificationActions = notificationSlice.actions;
 
 export default store;

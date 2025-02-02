@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import { isSessionValid } from "../util/auth";
-import store, { authActions } from "../store/store";
+import store, { authActions, notificationActions } from "../store/store";
 
 export async function action() {
   try {
@@ -15,7 +15,7 @@ export async function action() {
       }
 
       store.dispatch(
-        authActions.setNotification({
+        notificationActions.setNotification({
           icon: "success",
           color: "success",
           message: "You have logged out successfully",
@@ -23,7 +23,7 @@ export async function action() {
       );
     } else {
       store.dispatch(
-        authActions.setNotification({
+        notificationActions.setNotification({
           icon: "warning",
           color: "warning",
           message: "Session timed out. Please sign in again to continue",
@@ -34,7 +34,7 @@ export async function action() {
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
 
     store.dispatch(
-      authActions.setNotification({
+      notificationActions.setNotification({
         icon: "danger",
         color: "danger",
         message: errorMessage,

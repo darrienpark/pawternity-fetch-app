@@ -6,7 +6,7 @@ import MatchModal from "../components/dogs/MatchModal";
 import PaginationControls from "../components/dogs/PaginationControls";
 import Layout from "../components/Layout";
 import NoResults from "../components/NoResults";
-import NotificationSnackbar from "../components/NotificationSnackbar";
+import NotificationSnackbar from "../components/Notification";
 import { useAppSelector } from "../hooks/useStoreHooks";
 import { useFetchMatch } from "../hooks/useFetchMatch";
 import { usePaginationClient } from "../hooks/usePaginationClient";
@@ -18,7 +18,7 @@ function Favorites() {
     favorites,
     pageSize
   );
-  const { match, modalOpen, isLoading, error, setError, findBestMatch, setModalOpen } = useFetchMatch(favorites);
+  const { match, modalOpen, isLoading, findBestMatch, setModalOpen } = useFetchMatch(favorites);
 
   return (
     <Layout>
@@ -75,7 +75,7 @@ function Favorites() {
         )}
       </div>
 
-      <NotificationSnackbar message={error} open={!!error} onClose={() => setError(null)} variant="danger" />
+      <NotificationSnackbar />
     </Layout>
   );
 }
