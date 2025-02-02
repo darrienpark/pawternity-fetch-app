@@ -15,7 +15,7 @@ function BenefitsCard({ title, description, icon, iconBg }: Benefit) {
         >
           {icon}
         </div>
-        <p className="text-xl text-[1.25rem] font-medium">{title}</p>
+        <p className="text-xl text-[1.25rem] font-medium lg:w-11/12">{title}</p>
         <p className="text-[1rem]">{description}</p>
       </div>
     </div>

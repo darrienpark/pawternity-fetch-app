@@ -1,16 +1,11 @@
-import { Snackbar, Button, SnackbarProps } from "@mui/joy";
-import ErrorIcon from "@mui/icons-material/Error";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
 import InfoIcon from "@mui/icons-material/Info";
 import WarningIcon from "@mui/icons-material/Warning";
-
-type NotificationSnackbarProps = {
-  autohideDuration?: number;
-  message: string | null;
-  open: boolean;
-  onClose: () => void;
-  variant?: "danger" | "success" | "info" | "warning";
-};
+import { Button, Snackbar } from "@mui/joy";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/useStoreHooks";
+import { authActions } from "../store/store";
 
 const iconMap = {
   danger: <ErrorIcon />,
@@ -19,32 +14,45 @@ const iconMap = {
   warning: <WarningIcon />,
 };
 
-const NotificationSnackbar = ({
-  autohideDuration,
-  message,
-  open,
-  onClose,
-  variant = "info",
-}: NotificationSnackbarProps) => {
+const NotificationSnackbar = () => {
+  const dispatch = useAppDispatch();
+  const notification = useAppSelector((state) => state.authentication.notification);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (notification) {
+      setOpen(true);
+    }
+  }, [notification]);
+
+  const handleClose = <T extends HTMLElement>(_event: Event | SyntheticEvent<T, Event> | null, reason?: string) => {
+    if (reason === "clickaway") return;
+    setOpen(false);
+  };
+
+  const handleUnmount = () => {
+    dispatch(authActions.clearNotification());
+  };
+
+  if (!notification) return null;
+
   return (
     <Snackbar
-      autoHideDuration={autohideDuration}
+      autoHideDuration={5000}
       open={open}
       variant="solid"
-      color={variant as SnackbarProps["color"]}
-      onClose={(_event, reason) => {
-        if (reason === "clickaway") return;
-        onClose();
-      }}
-      startDecorator={iconMap[variant] || <InfoIcon />}
+      color={notification.color}
+      onClose={handleClose}
+      onUnmount={handleUnmount}
+      startDecorator={iconMap[notification.icon]}
       endDecorator={
-        <Button onClick={onClose} size="sm" variant="solid" color={variant as SnackbarProps["color"]}>
+        <Button onClick={handleClose} size="sm" variant="solid" color={notification.color}>
           Dismiss
         </Button>
       }
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
     >
-      {message}
+      {notification.message}
     </Snackbar>
   );
 };

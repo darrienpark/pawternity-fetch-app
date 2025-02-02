@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { isSessionValid } from "../util/auth";
 import { Dog } from "../models/types";
+import { isSessionValid } from "../util/auth";
 
 type FavoritesState = {
   favorites: Dog[];
@@ -23,19 +23,20 @@ const favoritesSlice = createSlice({
   },
 });
 
-type SnackbarProps = {
-  type: "danger" | "success" | "info" | "warning";
+type Notification = {
+  icon: "danger" | "success" | "info" | "warning";
+  color: "primary" | "neutral" | "danger" | "success" | "warning";
   message: string;
 };
 
 type AuthState = {
   isAuthenticated: boolean;
-  snackbar: SnackbarProps | null;
+  notification: Notification | null;
 };
 
 const initialAuthState: AuthState = {
   isAuthenticated: isSessionValid() ? true : false,
-  snackbar: null,
+  notification: null,
 };
 
 const authSlice = createSlice({
@@ -48,8 +49,11 @@ const authSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
-    setSnackbar(state, action: PayloadAction<SnackbarProps | null>) {
-      state.snackbar = action.payload;
+    setNotification(state, action: PayloadAction<Notification | null>) {
+      state.notification = action.payload;
+    },
+    clearNotification(state) {
+      state.notification = null;
     },
   },
 });

@@ -2,7 +2,6 @@ import { redirect } from "react-router-dom";
 import { isSessionValid } from "../util/auth";
 import store, { authActions } from "../store/store";
 
-// Define return type explicitly
 export async function action() {
   try {
     if (isSessionValid()) {
@@ -12,24 +11,39 @@ export async function action() {
       });
 
       if (!response.ok) {
-        throw new Error("Something went wrong while logging you out. Please try again.");
+        throw new Error("An unexpected error occurred!");
       }
 
-      store.dispatch(authActions.setSnackbar({ type: "success", message: "You have logged out successfully" }));
+      store.dispatch(
+        authActions.setNotification({
+          icon: "success",
+          color: "success",
+          message: "You have logged out successfully",
+        })
+      );
     } else {
       store.dispatch(
-        authActions.setSnackbar({ type: "warning", message: "Session timed out. Please sign in again to continue" })
+        authActions.setNotification({
+          icon: "warning",
+          color: "warning",
+          message: "Session timed out. Please sign in again to continue",
+        })
       );
     }
-
-    localStorage.removeItem("expiration");
-    store.dispatch(authActions.logout());
-    return redirect("/");
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
 
-    store.dispatch(authActions.setSnackbar({ type: "danger", message: errorMessage }));
-
-    return redirect("/");
+    store.dispatch(
+      authActions.setNotification({
+        icon: "danger",
+        color: "danger",
+        message: errorMessage,
+      })
+    );
   }
+
+  // Regardless token invalidation success, present to user with logged out state
+  localStorage.removeItem("expiration");
+  store.dispatch(authActions.logout());
+  return redirect("/");
 }
