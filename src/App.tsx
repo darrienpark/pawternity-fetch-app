@@ -7,7 +7,7 @@ import store from "./store/store";
 import joyTheme from "./theme/joyTheme";
 import materialTheme from "./theme/materialTheme";
 
-function App() {
+export default function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
@@ -18,5 +18,3 @@ function App() {
     </Provider>
   );
 }
-
-export default App;

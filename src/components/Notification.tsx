@@ -14,7 +14,7 @@ const iconMap = {
   warning: <WarningIcon />,
 };
 
-const Notification = () => {
+export default function Notification() {
   const dispatch = useAppDispatch();
   const notification = useAppSelector((state) => state.notification.notification);
   const [open, setOpen] = useState(false);
@@ -55,6 +55,4 @@ const Notification = () => {
       {notification.message}
     </Snackbar>
   );
-};
-
-export default Notification;
+}

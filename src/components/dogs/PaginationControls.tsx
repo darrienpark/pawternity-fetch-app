@@ -8,7 +8,13 @@ type PaginationControlsProps = {
   onPageSizeChange: (size: number) => void;
 };
 
-const PaginationControls = ({ start, end, totalItems, pageSize, onPageSizeChange }: PaginationControlsProps) => {
+export default function PaginationControls({
+  start,
+  end,
+  totalItems,
+  pageSize,
+  onPageSizeChange,
+}: PaginationControlsProps) {
   return (
     <div className="w-full flex flex-col-reverse gap-y-4 justify-between items-center sm:flex-row">
       <p>
@@ -29,6 +35,4 @@ const PaginationControls = ({ start, end, totalItems, pageSize, onPageSizeChange
       </div>
     </div>
   );
-};
-
-export default PaginationControls;
+}

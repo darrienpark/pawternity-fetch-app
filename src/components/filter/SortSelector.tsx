@@ -14,7 +14,7 @@ type SortSelectorProps = {
   onChange: (value: string) => void;
 };
 
-const SortSelector = ({ sort, onChange }: SortSelectorProps) => {
+export default function SortSelector({ sort, onChange }: SortSelectorProps) {
   return (
     <>
       <label id="sort-label" className="block text-sm font-medium text-gray-700">
@@ -34,6 +34,4 @@ const SortSelector = ({ sort, onChange }: SortSelectorProps) => {
       </Select>
     </>
   );
-};
-
-export default SortSelector;
+}

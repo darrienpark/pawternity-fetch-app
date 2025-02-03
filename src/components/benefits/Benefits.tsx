@@ -1,6 +1,6 @@
 import BenefitsGrid from "./BenefitsGrid";
 
-const Benefits = () => {
+export default function Benefits() {
   return (
     <div className="flex flex-col items-center gap-6 py-8 mb-16">
       <h1 className="text-[2.75rem] text-center">Why Choose Us?</h1>
@@ -12,6 +12,4 @@ const Benefits = () => {
       <BenefitsGrid />
     </div>
   );
-};
-
-export default Benefits;
+}

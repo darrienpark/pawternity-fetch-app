@@ -6,7 +6,7 @@ type BreedSelectorProps = {
   onChange: (value: string[]) => void;
 };
 
-const BreedSelector = ({ breeds, selectedBreeds, onChange }: BreedSelectorProps) => {
+export default function BreedSelector({ breeds, selectedBreeds, onChange }: BreedSelectorProps) {
   return (
     <Autocomplete
       className="w-full sm:flex-grow sm:w-auto"
@@ -18,6 +18,4 @@ const BreedSelector = ({ breeds, selectedBreeds, onChange }: BreedSelectorProps)
       onChange={(_, value) => onChange(value)}
     />
   );
-};
-
-export default BreedSelector;
+}

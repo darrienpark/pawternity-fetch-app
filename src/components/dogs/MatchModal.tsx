@@ -7,7 +7,7 @@ interface MatchModalProps {
   match: Dog | null;
 }
 
-const MatchModal = ({ open, onClose, match }: MatchModalProps) => {
+export default function MatchModal({ open, onClose, match }: MatchModalProps) {
   return (
     <Modal
       aria-labelledby="modal-title"
@@ -59,6 +59,4 @@ const MatchModal = ({ open, onClose, match }: MatchModalProps) => {
       </ModalOverflow>
     </Modal>
   );
-};
-
-export default MatchModal;
+}

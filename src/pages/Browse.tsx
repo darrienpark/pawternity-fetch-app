@@ -9,7 +9,7 @@ import { useFetchBreeds } from "../hooks/useFetchBreeds";
 import { useFilters } from "../hooks/useFilters";
 import { usePaginationServer } from "../hooks/usePaginationServer";
 
-const BrowsePage = () => {
+export default function BrowsePage() {
   const { filters, handleFilterChange, updatePageSize } = useFilters();
   const { breeds, isLoading: isBreedsLoading } = useFetchBreeds();
   const {
@@ -60,6 +60,4 @@ const BrowsePage = () => {
       </div>
     </Layout>
   );
-};
-
-export default BrowsePage;
+}

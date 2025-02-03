@@ -1,7 +1,7 @@
 import { Button } from "@mui/joy";
 import { Form } from "react-router-dom";
 
-function SignOutButton() {
+export default function SignOutButton() {
   return (
     <Form action="/logout" method="POST">
       <Button variant="solid" type="submit" color="neutral">
@@ -10,5 +10,3 @@ function SignOutButton() {
     </Form>
   );
 }
-
-export default SignOutButton;

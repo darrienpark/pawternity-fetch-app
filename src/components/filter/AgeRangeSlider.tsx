@@ -8,7 +8,7 @@ type AgeRangeSliderProps = {
   onChange: (value: number[]) => void;
 };
 
-const AgeRangeSlider = ({ range, min, max, onChange }: AgeRangeSliderProps) => {
+export default function AgeRangeSlider({ range, min, max, onChange }: AgeRangeSliderProps) {
   const lastChange = useRef<number | null>();
   const [sliderValue, setSliderValue] = useState(range);
 
@@ -42,6 +42,4 @@ const AgeRangeSlider = ({ range, min, max, onChange }: AgeRangeSliderProps) => {
       />
     </div>
   );
-};
-
-export default AgeRangeSlider;
+}

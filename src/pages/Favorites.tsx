@@ -11,7 +11,7 @@ import { useAppSelector } from "../hooks/useStoreHooks";
 import { useFetchMatch } from "../hooks/useFetchMatch";
 import { usePaginationClient } from "../hooks/usePaginationClient";
 
-function Favorites() {
+export default function Favorites() {
   const favorites = useAppSelector((state) => state.favorites.favorites);
   const [pageSize, setPageSize] = useState(25);
   const { paginatedItems, currentPage, handlePageChange, totalPages, start, end } = usePaginationClient(
@@ -79,5 +79,3 @@ function Favorites() {
     </Layout>
   );
 }
-
-export default Favorites;

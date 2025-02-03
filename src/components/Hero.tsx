@@ -3,7 +3,7 @@ import HeroBackground from "../assets/HeroBackground.webp";
 import { NavLink } from "react-router-dom";
 import Layout from "./Layout";
 
-function Hero() {
+export default function Hero() {
   return (
     <div className="relative w-full min-h-[50vh] md:min-h-[40vh] flex items-end justify-start pt-48 pb-24 px-6 md:px-16">
       <div
@@ -26,5 +26,3 @@ function Hero() {
     </div>
   );
 }
-
-export default Hero;

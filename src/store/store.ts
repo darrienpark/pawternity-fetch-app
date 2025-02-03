@@ -6,13 +6,35 @@ type FavoritesState = {
   favorites: Dog[];
 };
 
-const initialState: FavoritesState = {
+type AuthState = {
+  isAuthenticated: boolean;
+};
+
+type Notification = {
+  icon: "danger" | "success" | "info" | "warning";
+  color: "primary" | "neutral" | "danger" | "success" | "warning";
+  message: string;
+};
+
+type NotificationState = {
+  notification: Notification | null;
+};
+
+const initialFavoritesState: FavoritesState = {
   favorites: [],
+};
+
+const initialAuthState: AuthState = {
+  isAuthenticated: isSessionValid() ? true : false,
+};
+
+const initialNotificationState: NotificationState = {
+  notification: null,
 };
 
 const favoritesSlice = createSlice({
   name: "favorites",
-  initialState,
+  initialState: initialFavoritesState,
   reducers: {
     add(state, action: PayloadAction<Dog>) {
       state.favorites.push(action.payload);
@@ -22,24 +44,6 @@ const favoritesSlice = createSlice({
     },
   },
 });
-
-type Notification = {
-  icon: "danger" | "success" | "info" | "warning";
-  color: "primary" | "neutral" | "danger" | "success" | "warning";
-  message: string;
-};
-
-type AuthState = {
-  isAuthenticated: boolean;
-};
-
-type NotificationState = {
-  notification: Notification | null;
-};
-
-const initialAuthState: AuthState = {
-  isAuthenticated: isSessionValid() ? true : false,
-};
 
 const authSlice = createSlice({
   name: "authentication",
@@ -53,10 +57,6 @@ const authSlice = createSlice({
     },
   },
 });
-
-const initialNotificationState: NotificationState = {
-  notification: null,
-};
 
 const notificationSlice = createSlice({
   name: "notification",
@@ -84,5 +84,4 @@ export type AppDispatch = typeof store.dispatch;
 export const favoritesActions = favoritesSlice.actions;
 export const authActions = authSlice.actions;
 export const notificationActions = notificationSlice.actions;
-
 export default store;

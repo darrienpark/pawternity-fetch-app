@@ -2,8 +2,9 @@ import { Card, CardContent } from "@mui/joy";
 import bg from "../assets/dogwalkbackground.webp";
 import Layout from "../components/Layout";
 import LoginForm from "../components/LoginForm";
+import Notification from "../components/Notification";
 
-const LoginPage = () => {
+export default function LoginPage() {
   return (
     <div
       className="flex flex-col flex-grow justify-center items-center bg-cover bg-center"
@@ -21,8 +22,7 @@ const LoginPage = () => {
           </CardContent>
         </Card>
       </Layout>
+      <Notification />
     </div>
   );
-};
-
-export default LoginPage;
+}

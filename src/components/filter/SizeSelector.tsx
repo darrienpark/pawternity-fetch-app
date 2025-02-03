@@ -7,7 +7,7 @@ type SizeSelector = {
   onChange: (value: number) => void;
 };
 
-const SizeSelector = ({ size, onChange }: SizeSelector) => {
+export default function SizeSelector({ size, onChange }: SizeSelector) {
   return (
     <>
       <label id="size-label" className="block text-sm font-medium text-gray-700">
@@ -27,6 +27,4 @@ const SizeSelector = ({ size, onChange }: SizeSelector) => {
       </Select>
     </>
   );
-};
-
-export default SizeSelector;
+}

@@ -6,7 +6,7 @@ type PageLinkProps = {
   onClick?: () => void;
 };
 
-function PageLink({ to, label, onClick }: PageLinkProps) {
+export default function PageLink({ to, label, onClick }: PageLinkProps) {
   return (
     <NavLink
       to={to}
@@ -21,5 +21,3 @@ function PageLink({ to, label, onClick }: PageLinkProps) {
     </NavLink>
   );
 }
-
-export default PageLink;

@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import Layout from "../components/Layout";
 import NotificationSnackbar from "../components/Notification";
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <>
       <section>
@@ -17,6 +17,4 @@ const HomePage = () => {
       <NotificationSnackbar />
     </>
   );
-};
-
-export default HomePage;
+}

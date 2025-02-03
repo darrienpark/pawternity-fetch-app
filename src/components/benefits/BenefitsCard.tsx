@@ -5,7 +5,7 @@ type Benefit = {
   iconBg: string;
 };
 
-function BenefitsCard({ title, description, icon, iconBg }: Benefit) {
+export default function BenefitsCard({ title, description, icon, iconBg }: Benefit) {
   return (
     <div className="p-[1.5rem] bg-white rounded-[14px] border border-[#b7c2bf]">
       <div className="flex flex-col items-start gap-[.5rem]">
@@ -21,5 +21,3 @@ function BenefitsCard({ title, description, icon, iconBg }: Benefit) {
     </div>
   );
 }
-
-export default BenefitsCard;

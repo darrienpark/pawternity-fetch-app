@@ -11,7 +11,7 @@ type FilterProps = {
   onChange: (newFilters: FilterOptions) => void;
 };
 
-const Filter = ({ breeds, filters, onChange }: FilterProps) => {
+export default function Filter({ breeds, filters, onChange }: FilterProps) {
   const [moreOptions, setMoreOptions] = useState(false);
 
   function handleInputChange<T extends keyof FilterOptions>(field: T, value: FilterOptions[T]) {
@@ -44,6 +44,4 @@ const Filter = ({ breeds, filters, onChange }: FilterProps) => {
       )}
     </div>
   );
-};
-
-export default Filter;
+}
