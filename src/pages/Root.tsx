@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/header/Navbar";
 import { useAppSelector } from "../hooks/useStoreHooks";
 import { getTokenDuration } from "../util/auth";
+import ScrollToTop from "../components/ScrollToTop";
 
 export default function RootLayout() {
   const isAuthenticated = useAppSelector((state) => state.authentication.isAuthenticated);
@@ -24,6 +25,7 @@ export default function RootLayout() {
     <div className="flex flex-col min-h-screen bg-[#f9f6ef]">
       <Header />
       <main className="flex flex-col flex-grow" role="main" aria-label="Main Content">
+        <ScrollToTop />
         <Outlet />
       </main>
       <Footer />
